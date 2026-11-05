@@ -8,7 +8,7 @@ export default defineConfig({
   reporter: 'html',
   use: {
     baseURL: 'https://migration.pestream.com/Account/Login',
-    headless: false,
+    headless: Boolean(process.env.CI),
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
   },

@@ -3,9 +3,9 @@ import { expectTitleVisible } from './helpers/common';
 import { login } from './helpers/login';
 
 test('logs in with configured credentials', async ({ page }) => {
-  const companyKey = 'ABCDallas';
-  const username = 'ABCDallas';
-  const password = 'Info@12345';
+  const companyKey = process.env.COMPANY_KEY ?? '';
+  const username = process.env.TEST_USERNAME ?? '';
+  const password = process.env.TEST_PASSWORD ?? '';
 
   test.skip(
     !companyKey || !username || !password,

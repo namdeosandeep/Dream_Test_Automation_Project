@@ -3,10 +3,15 @@ import { login } from './helpers/login';
 
 test('Adding Opportunity with Existing Account', async ({ page }) => {
 	const credentials = {
-		companyKey: 'ABCDallas',
-		username: 'ABCDallas',
-		password: 'Info@12345',
+		companyKey: process.env.COMPANY_KEY ?? '',
+		username: process.env.TEST_USERNAME ?? '',
+		password: process.env.TEST_PASSWORD ?? '',
 	};
+
+	test.skip(
+		!credentials.companyKey || !credentials.username || !credentials.password,
+		'Set COMPANY_KEY, TEST_USERNAME, and TEST_PASSWORD to run this test',
+	);
 
 	await login(page, credentials);
 	await page.goto('/Sales/Lead');

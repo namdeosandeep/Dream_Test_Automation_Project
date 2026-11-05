@@ -53,6 +53,16 @@ Visual Studio Code is optional. The tests use the configured Chrome project and 
 
 Tests belong under `tests/` and use the `.spec.ts` suffix. The shared login helper is in `tests/helpers/login.ts`. The current browser target and test behavior are configured in `playwright.config.ts`.
 
+## Run tests with GitHub Actions
+
+The Playwright workflow runs when code is pushed to `main` and can also be started manually from the Actions tab. Add these repository Actions secrets before running it:
+
+- `COMPANY_KEY`
+- `TEST_USERNAME`
+- `TEST_PASSWORD`
+
+The workflow installs Chromium, runs `npm test` in headless mode, and uploads the HTML report and test results as an artifact.
+
 ## Run tests
 
 Run all tests:

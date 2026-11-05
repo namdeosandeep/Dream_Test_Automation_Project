@@ -4,9 +4,9 @@ import { login } from './helpers/login';
 
 const reportCategories = ['CRM', 'SalesAuto', 'WorkOrder', 'Billing', 'General', 'Beta Testing Report'];
 const credentials = {
-  companyKey: 'ABCDallas',
-  username: 'ABCDallas',
-  password: 'Info@12345',
+  companyKey: process.env.COMPANY_KEY ?? '',
+  username: process.env.TEST_USERNAME ?? '',
+  password: process.env.TEST_PASSWORD ?? '',
 };
 const reportsUrl = new URL('/SSRSReports/Index', 'https://staging.pestream.com/').href;
 const reportsPath = new URL(reportsUrl).pathname.replace(/\/+$/, '');
@@ -20,6 +20,10 @@ for (const categoryName of reportCategories) {
   test(`${categoryName} reports open without an error or blank page`, async ({ page }) => {
     test.setTimeout(10 * 60 * 1000);
     page.setDefaultNavigationTimeout(30_000);
+    test.skip(
+      !credentials.companyKey || !credentials.username || !credentials.password,
+      'Set COMPANY_KEY, TEST_USERNAME, and TEST_PASSWORD to run this test',
+    );
 
     await login(page, credentials);
     await page.goto(reportsUrl);
